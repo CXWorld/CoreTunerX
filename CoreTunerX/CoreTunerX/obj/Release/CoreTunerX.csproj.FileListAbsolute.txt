@@ -1,7 +1,0 @@
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\bin\Release\CoreTunerX.exe.config
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\bin\Release\CoreTunerX.exe
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\bin\Release\CoreTunerX.pdb
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\obj\Release\CoreTunerX.csprojAssemblyReference.cache
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\obj\Release\CoreTunerX.csproj.CoreCompileInputs.cache
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\obj\Release\CoreTunerX.exe
-D:\Code\CoreTunerX\CoreTunerX\CoreTunerX\obj\Release\CoreTunerX.pdb
