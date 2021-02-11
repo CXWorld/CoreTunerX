@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreTunerX;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -21,16 +22,15 @@ namespace ReadEventLogExample
                 var filteredEntries = eventLog.Entries
                     .Cast<EventLogEntry>()
                     .Where(logEntry => logEntry.InstanceId == 55)
-                    .Take(threadCount)
-                    .OrderBy(logEntry => Convert.ToInt32(logEntry.ReplacementStrings[1]))
-                    .ToList();
+                    .TakeLast(threadCount)
+                    .OrderBy(logEntry => Convert.ToInt32(logEntry.ReplacementStrings[1]));
 
                 using (StreamWriter file =
                     new StreamWriter("results.txt"))
                 {
-                    for (int i = 0; i < filteredEntries.Count; i++)
+                    foreach (var entry in filteredEntries)
                     {
-                        file.WriteLine($"Core {filteredEntries[i].ReplacementStrings[1]} with performance number {filteredEntries[i].ReplacementStrings[5]}");
+                        file.WriteLine($"Core {entry.ReplacementStrings[1]} with performance number {entry.ReplacementStrings[5]}");
                     }
                 }
 
@@ -42,7 +42,6 @@ namespace ReadEventLogExample
                 Console.WriteLine("Press any key...");
                 Console.ReadKey();
             }
-
         }
     }
 }
