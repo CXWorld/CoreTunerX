@@ -23,14 +23,23 @@ namespace ReadEventLogExample
                     .Cast<EventLogEntry>()
                     .Where(logEntry => logEntry.InstanceId == 55)
                     .TakeLast(threadCount)
-                    .OrderBy(logEntry => Convert.ToInt32(logEntry.ReplacementStrings[1]));
+                    .OrderBy(logEntry => Convert.ToInt32(logEntry.ReplacementStrings[1]))
+                    .ToList();
+
+                var isSmtOn = filteredEntries.Where((x, i) => i % 2 == 1)
+                    .Select(logEntry => Convert.ToInt32(logEntry.ReplacementStrings[5]))
+                    .SequenceEqual(filteredEntries.Where((x, i) => i % 2 == 0)
+                    .Select(logEntry => Convert.ToInt32(logEntry.ReplacementStrings[5])));
+
+                if (isSmtOn)
+                    filteredEntries = filteredEntries.Where((x, i) => i % 2 == 0).ToList();
 
                 using (StreamWriter file =
                     new StreamWriter("results.txt"))
                 {
-                    foreach (var entry in filteredEntries)
+                    for (int i = 0; i < filteredEntries.Count; i++)
                     {
-                        file.WriteLine($"Core {entry.ReplacementStrings[1]} with performance number {entry.ReplacementStrings[5]}");
+                        file.WriteLine($"Core {i} with performance number {filteredEntries[i].ReplacementStrings[5]}");
                     }
                 }
 
